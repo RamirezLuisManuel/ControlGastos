@@ -1,0 +1,547 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background-color: #4a4657;
+    color: white;
+}
+
+.navbar {
+    height: 80px;
+    background-color: #1c1c1c;
+    padding: 15px 0;
+    color: white;
+    justify-content: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.logo span {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: -80px;
+    margin-top: 15px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
+    margin-top: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+    font-family: sans-serif;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #888;
+}
+
+.welcome-bar {
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    border-top: 1px solid #ccc;
+    font-weight: 600;
+    border: 1px solid black;
+}
+
+.main-content {
+    background-color: #f1edec;
+    background-image: url('/assets/Fondo_InicioU.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.main-content h2 {
+    margin-top: 0;
+}
+
+
+section {
+    background-color: #fff2cc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(253, 253, 253, 0.089);
+    border: 1px solid #0f0f0f;
+    align-items: center;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    background: rgba(100, 175, 140, 0.35);
+}
+
+section h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.paypal {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px;
+    scroll-behavior: smooth;
+}
+
+.paypal::-webkit-scrollbar {
+    height: 10px;
+}
+
+.paypal::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.paypal::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+    position: relative;
+    margin-right: 10px;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #5b4e76;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-family: sans-serif;
+    font-size: small;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #5b4e76 transparent transparent transparent;
+}
+
+li:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.info-container {
+    display: flex;
+    justify-content: start;
+    margin: 10px 0;
+    position: absolute;
+    top: 90px;
+    left: 10px;
+    z-index: 10;
+}
+
+.floating-window {
+    background-color: rgba(0, 3, 34, 0.568);
+    padding: 10px;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.text-red {
+    color: rgb(255, 7, 7);
+}
+
+.text-green {
+    color: rgb(57, 235, 57);
+}
+
+.locate-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 100;
+}
+
+.locate-button:hover {
+    background-color: #16a085;
+}
+
+.transferencia-container {
+    width: 1000px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    font-family: sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+}
+
+.column label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    font-family: sans-serif;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.radio-group label {
+    margin-right: 10px;
+}
+
+.eliminar-tarjeta {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #45076e;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.agregar-tarjeta {
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: sans-serif;
+}
+
+button.cancelar {
+    background-color: #ccc;
+}
+
+/* From Uiverse.io by vinodjangid07 */
+button.confirmar {
+    width: 130px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(15, 15, 15);
+    border: none;
+    color: white;
+    font-weight: 600;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+}
+
+.svgIcon {
+    width: 16px;
+}
+
+.svgIcon path {
+    fill: white;
+}
+
+.confirmar::before {
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    content: "";
+    background-color: white;
+    border-radius: 50%;
+    left: -100%;
+    top: 0;
+    transition-duration: .3s;
+    mix-blend-mode: difference;
+}
+
+.confirmar:hover::before {
+    transition-duration: .3s;
+    transform: translate(100%, -50%);
+    border-radius: 0;
+}
+
+.confirmar:active {
+    transform: translate(5px, 5px);
+    transition-duration: .3s;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+.encabezado-imagen {
+    width: 20%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nuevo-saldo {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.text-green {
+    color: green;
+}
+
+.text-green:focus,
+.text-green:active {
+    transform: scale(1.1);
+}
+
+.notification {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    background-color: #3b9c3e71;
+    color: white;
+    font-weight: 600;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: slideInRight 0.5s forwards, slideOutRight 0.5s forwards 2.5s;
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.tarjeta-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.btn-eliminar {
+    background: none;
+    border: none;
+    color: red;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.btn-eliminar i {
+    font-size: 16px;
+}
+
+/* Añade esta parte al final de tu CSS */
+
+@media screen and (max-width: 768px) {
+    .logo span {
+        font-size: 20px;
+        font-weight: bold;
+        white-space: nowrap;
+        margin-left: 0px;
+        margin-top: 13px;
+    }
+
+    .row {
+        flex-direction: column;
+        margin: 0;
+        /* Elimina márgenes adicionales */
+    }
+
+    .column {
+        width: 90%;
+        /* Reduce el ancho para que no se vean tan grandes */
+        padding: 10px;
+        /* Incrementa el padding ligeramente para mejor estética */
+        margin: 0 auto;
+        /* Centra las columnas */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 95%;
+        /* Ajusta el ancho de los campos */
+        font-size: 14px;
+        /* Reduce ligeramente el tamaño de fuente */
+        padding: 10px;
+        /* Ajusta el padding interno */
+        margin-bottom: 10px;
+        /* Menos espacio entre los campos */
+    }
+
+    .button-group {
+        flex-direction: column;
+        /* Apila los botones verticalmente */
+        align-items: center;
+        /* Centra los botones */
+    }
+
+    button {
+        width: 90%;
+        /* Ajusta el ancho de los botones */
+        margin-bottom: 10px;
+        /* Añade espacio inferior entre los botones */
+    }
+
+    form {
+        margin-top: 20px;
+        /* Agrega un pequeño margen superior */
+    }
+
+    .transferencia-container {
+        padding: 15px;
+        /* Ajusta el padding interno para espacios pequeños */
+        width: 95%;
+        /* Adapta el contenedor */
+        box-shadow: none;
+        /* Elimina sombras innecesarias para simplicidad */
+    }
+
+    h2 {
+        font-size: 18px;
+        /* Reduce el tamaño del título para que se ajuste */
+        margin-bottom: 10px;
+    }
+
+    section {
+        padding: 15px;
+        border-radius: 8px;
+    }
+}

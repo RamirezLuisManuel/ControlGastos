@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                  <div class="logo">
+                    <a routerLink="/inicio-usuario">
+                      <span>CONTROL GASTOS</span>
+                    </a>
+                  </div>
+                  <ul class="nav-links">
+                    <li><a routerLink="/home">Cerrar sesión</a></li>
+                  </ul>
+                </div>
+              </nav>
+              <div class="welcome-bar">
+                Perfil Usuario
+            </div>
+        </header>
+        <main class="main-content">
+            <section class="seccion-perfil-usuario">
+                <div class="perfil-usuario-header">
+                    <div class="perfil-usuario-portada">
+                        <div class="perfil-usuario-avatar">
+                            <img src="/assets/Usuario.png">
+                          </div>                          
+                    </div>
+                </div>
+                <div class="perfil-usuario-body">
+                    <div class="perfil-usuario-bio">
+                        <h3 class="titulo">
+                            {{ usuario?.Nombre + ' ' + usuario?.ApPaterno + ' ' + usuario?.ApMaterno || 'Nombre del Usuario' }}
+                        </h3>
+                    </div>
+                    <div class="perfil-usuario-footer">
+                        <ul class="lista-datos">
+                            <li><i class="icono fas fa-envelope"></i> Dirección de usuario: {{ usuario?.Correo || 'No disponible' }}</li>
+                            <li><i class="icono fas fa-phone-alt"></i> Teléfono: {{ usuario?.NumTelefono || 'No disponible' }}</li>
+                            <li><i class="icono fas fa-user"></i> Rol: {{ usuario?.Rol || 'No disponible' }}</li>
+                        </ul>
+                        <ul class="lista-datos">
+                            <li><i class="icono fas fa-calendar-alt"></i> Fecha de nacimiento: {{ usuario?.FechaNacimiento || 'No disponible' }}</li>
+                            <li><i class="icono fas fa-user"></i> Usuario: {{ usuario?.Usuario || 'No disponible' }}</li>
+                        </ul>
+                            <li *ngIf="usuario?.Rol === 'admin'" class="codigo-admin" ><i class="fas fa-users"></i> Codigo: {{ usuario?.CodigoAdmin || 'No disponible' }}</li>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <app-footer></app-footer> 
+    </div>
+</body>
+</html>

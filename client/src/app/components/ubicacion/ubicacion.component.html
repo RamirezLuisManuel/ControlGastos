@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                    <div class="logo">
+                        <a routerLink="/inicio-usuario">
+                            <span>CONTROL GASTOS</span>
+                        </a>
+                    </div>
+                    <ul class="nav-links">
+                        <li><a (click)="finalizarRuta()">Finalizar</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="welcome-bar">
+                Mapa Ubicación
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="dropdown">
+                <button class="dropdown-btn">Rutas Guardadas</button>
+                <div class="dropdown-content">
+                    <div *ngFor="let ruta of rutasCompletas">
+                        <button (click)="dibujarRuta(ruta)">
+                            Ruta desde {{ ruta.FechaInicio | date:'short' }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <section class="gastos">
+                <!-- Mapa de ubicación -->
+                <div id="map" class="map-styled"></div>
+                <button (click)="irALaUbicacionActual()" class="btn-location">
+                    <i class="fas fa-map-marker-alt fa-2x"></i> 
+                </button>
+
+                <!-- Menú desplegable para las rutas -->
+                
+            </section>
+        </main>
+    </div>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+</body>
+</html>

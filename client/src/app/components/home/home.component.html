@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Gastos</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                    <div class="logo">
+                        <a routerLink="/">
+                            <span>CONTROL GASTOS</span>
+                        </a>
+                    </div>
+                    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+                    <ul class="styled-list nav-links" [class.show]="isMenuVisible" id="nav-links">
+                        <li><a routerLink="/registrarse">Registrarte</a></li>
+                        <li><a routerLink="/login">Inicia sesión</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="welcome-bar">
+                Bienvenido
+            </div>
+        </header>
+        <div *ngIf="notificationMessage" class="notification">
+            {{ notificationMessage }} <i class="fas fa-check"></i>
+        </div>  
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <img src="assets/mony5.jpg" alt="Imagen 1">
+                <div class="carousel-text">Escuche los mejores podcasts sobre finanzas</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="assets/mony2.jpg" alt="Imagen 2">
+                <div class="carousel-text">Organice, registre y administre su dinero</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="assets/mony3.jpg" alt="Imagen 3">
+                <div class="carousel-text">Este al tanto del mundo de las finanzas</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="assets/mony4.jpg" alt="Imagen 4">
+                <div class="carousel-text">Nutra sus conocimientos sobre finanzas</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="assets/mony1.jpg" alt="Imagen 5">
+                <div class="carousel-text">Controle su dinero para que no lo controle a usted</div>
+            </div>
+        </div>             
+    </div>
+</body>
+</html>

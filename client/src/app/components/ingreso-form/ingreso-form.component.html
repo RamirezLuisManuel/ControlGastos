@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                  <div class="logo">
+                    <a routerLink="/inicio-usuario">
+                      <span>CONTROL GASTOS</span>
+                    </a>
+                  </div>
+                  <ul class="nav-links">
+                  </ul>
+                </div>
+              </nav>
+              <div class="welcome-bar">
+                Registro Ingreso
+            </div>
+        </header>
+        <main class="main-content">
+            <a routerLink="/ingresos/list" class="Btn">
+                <i class="fas fa-list"></i>
+                <div class="text">Lista Ingresos</div>
+            </a>
+            <div class="container">
+                <form id="registroForm" class="form-grid" (ngSubmit)="saveIngreso()">
+                    <h1>Formulario de Registro</h1>
+                    <p>Completa los siguientes campos para guardar tu ingreso.</p>
+                    <div class="form-group">
+                        <div>
+                            <label for="tipoIngreso">Tipo de ingreso</label>
+                            <select id="tipoIngreso" name="tipoIngreso" [(ngModel)]="ingreso.TipoIngreso" required>
+                                <option value="" disabled selected>Selecciona tipo de ingreso</option>
+                                <option value="Venta de Servicios">Venta de Servicios</option>
+                                <option value="Venta en Tienda Física">Venta en Tienda Física</option>
+                                <option value="Venta Corporativa">Venta Corporativa</option>
+                                <option value="Promociones y Ofertas">Promociones y Ofertas</option>
+                                <option value="Eventos Especiales">Eventos Especiales</option>
+                                <option value="Inversiones">Inversiones</option>
+                                <option value="Intereses y Rendimientos">Intereses y Rendimientos</option>
+                                <option value="Patrocinios y Colaboraciones">Patrocinios y Colaboraciones</option>
+                                <option value="Comisiones por Referencias">Comisiones por Referencias</option>
+                                <option value="Cursos y Talleres">Cursos y Talleres</option>
+                            </select>
+                            <div class="error-message" *ngIf="errorMessages['TipoIngreso']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['TipoIngreso'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="origenIngreso">Origen del ingreso</label>
+                            <input type="text" id="origenIngreso" name="origenIngreso" placeholder="Ingresa el origen del ingreso" required [(ngModel)]="ingreso.OrigenIngreso">
+                            <div class="error-message" *ngIf="errorMessages['OrigenIngreso']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['OrigenIngreso'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="categoria">Categoría</label>
+                            <select id="categoria" name="categoria" [(ngModel)]="ingreso.Categoria" required>
+                                <option value="" disabled selected>Selecciona categoría</option>
+                                <option value="Diseño y Personalización">Diseño y Personalización</option>
+                                <option value="Servicios de Consultoría">Servicios de Consultoría</option>
+                                <option value="Ingresos por Inversiones">Ingresos por Inversiones</option>
+                                <option value="Ingresos por Intereses">Ingresos por Intereses</option>
+                                <option value="Dividendos">Dividendos</option>
+                                <option value="Patrocinios">Patrocinios</option>
+                                <option value="Comisiones por Referencias">Comisiones por Referencias</option>
+                                <option value="Cursos y Talleres">Cursos y Talleres</option>
+                                <option value="Derechos de Autor o Licencias">Derechos de Autor o Licencias</option>
+                                <option value="Subvenciones y Ayudas">Subvenciones y Ayudas</option>
+                            </select>
+                            <div class="error-message" *ngIf="errorMessages['Categoria']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Categoria'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="monto">Monto</label>
+                            <input type="number" id="monto" name="monto" placeholder="Ingresa el monto" required [(ngModel)]="ingreso.Monto">
+                            <div class="error-message" *ngIf="errorMessages['Monto']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Monto'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="fechaIngreso">Fecha de ingreso</label>
+                            <input type="date" id="fechaIngreso" name="fechaIngreso" required [(ngModel)]="ingreso.FechaIngreso">
+                            <div class="error-message" *ngIf="errorMessages['FechaIngreso']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['FechaIngreso'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel" routerLink="/ingresos/list">Cancelar</button>
+                        <button type="submit" class="submit"><i class="fas fa-check"></i> Guardar</button>
+                    </div>
+                    <div class="error-message" *ngIf="errorMessages['general']">
+                        <i class="fas fa-exclamation-circle"></i> {{ errorMessages['general'] }}
+                    </div>
+                </form>                              
+            </div>
+        </main>   
+        <app-footer></app-footer> 
+    </div>
+</body>
+</html>

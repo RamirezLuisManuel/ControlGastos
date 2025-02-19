@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                    <div class="logo">
+                        <a routerLink="/">
+                            <span>CONTROL GASTOS</span>
+                        </a>
+                    </div>
+                    <ul class="nav-links">
+                        <li><a routerLink="/login">Inicia sesión</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="welcome-bar">
+                Registrate
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="container">
+                <form id="registroForm" class="form-grid" (ngSubmit)="saveNewUsuario()">
+                    <h1>Crear cuenta</h1>
+                    <p>Completa los siguientes campos para crear tu cuenta.</p>
+                    <div class="form-group">
+                        <div>
+                            <label for="nombre">Nombre(s)</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required [(ngModel)]="usuario.Nombre">
+                            <div class="error-message" *ngIf="errorMessages['Nombre']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Nombre'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="apellidoPaterno">Apellido Paterno</label>
+                            <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="Ingresa tu apellido paterno" required [(ngModel)]="usuario.ApPaterno">
+                            <div class="error-message" *ngIf="errorMessages['ApPaterno']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['ApPaterno'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="apellidoMaterno">Apellido Materno</label>
+                            <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Ingresa tu apellido materno" required [(ngModel)]="usuario.ApMaterno">
+                            <div class="error-message" *ngIf="errorMessages['ApMaterno']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['ApMaterno'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="telefono">Num. Teléfono</label>
+                            <input type="text" id="telefono" name="telefono" pattern="[0-9]{1,}" title="Ingresa solo números" placeholder="Ingresa tu número de teléfono" required [(ngModel)]="usuario.NumTelefono">
+                            <div class="error-message" *ngIf="errorMessages['NumTelefono']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['NumTelefono'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="correo">Correo Electrónico</label>
+                            <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo electrónico" required [(ngModel)]="usuario.Correo">
+                            <div class="error-message" *ngIf="errorMessages['Correo']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Correo'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento" required [(ngModel)]="usuario.FechaNacimiento">
+                            <div class="error-message" *ngIf="errorMessages['FechaNacimiento']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['FechaNacimiento'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="usuario">Crear Usuario</label>
+                            <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu nombre de usuario" required [(ngModel)]="usuario.Usuario">
+                            <div class="error-message" *ngIf="errorMessages['Usuario']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Usuario'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="contrasena">Crear Contraseña</label>
+                            <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa una contraseña" required [(ngModel)]="usuario.Contrasena" [type]="showPassword ? 'text' : 'password'">
+                            <div class="eye-icon-container">
+                                <i class="fas fa-eye" (click)="togglePasswordVisibility('contrasena')"></i>
+                            </div>
+                            <div class="error-message" *ngIf="errorMessages['Contrasena']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Contrasena'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="confirmarContrasena">Confirmar Contraseña</label>
+                            <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder="Confirma tu contraseña" required [(ngModel)]="confirmarContrasena" [type]="showConfirmPassword ? 'text' : 'password'">
+                            <div class="eye-icon-container">
+                                <i class="fas fa-eye" (click)="togglePasswordVisibility('confirmarContrasena')"></i>
+                            </div>
+                            <div class="error-message" *ngIf="errorMessages['ConfirmarContrasena']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['ConfirmarContrasena'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div >
+                            <label for="rol">Rol</label>
+                            <select id="rol" name="rol" required [(ngModel)]="usuario.Rol">
+                                <option value="normal">Usuario Normal</option>
+                            </select>
+                        </div>
+                        <div *ngIf="usuario.Rol === 'normal'">
+                            <label for="codigoAdmin">Código del Administrador</label>
+                            <input type="text" id="codigoAdmin" name="codigoAdmin" [(ngModel)]="usuario.CodigoAdmin">
+                            <div class="error-message" *ngIf="errorMessages['CodigoAdmin']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['CodigoAdmin'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel" routerLink="/login">Cancelar</button>
+                        <button type="submit" class="submit"><i class="fas fa-check"></i> Crear Cuenta</button>
+                    </div>
+                    <div class="error-message" *ngIf="errorMessages['general']">
+                        <i class="fas fa-exclamation-circle"></i> {{ errorMessages['general'] }}
+                    </div>
+                </form>                              
+            </div>
+        </main>   
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-container">
+          <div class="logo">
+            <a routerLink="/inicio-usuario">
+              <span>CONTROL GASTOS</span>
+            </a>
+          </div>
+          <ul class="nav-links">
+          </ul>
+        </div>
+      </nav>
+      <div class="welcome-bar">
+        Resumen
+      </div>
+    </header>
+    <div *ngIf="selectedVideoUrl" class="video-popup" #videoPopup (mousedown)="onMouseDown($event)"
+      (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()">
+      <iframe [src]="selectedVideoUrl | safeUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <main class="main-content">
+      <h1>Resumen Gastos</h1>
+      
+      <button class="button_descargar" (click)="createPdf()">Descargar PDF</button>
+      <div class="white-container">
+        <div class="filters">
+          <div class="filter-dropdown">
+            <input type="date" (change)="onDateSelected($event)" class="button_filter">
+          </div>
+          <div class="type-filter-dropdown">
+            <button class="button_filter">Filtrar por Tipo</button>
+            <div class="dropdown-content">
+              <a (click)="filterByType('all')">Todo</a>
+              <a (click)="filterByType('Gasto')">Gastos</a>
+              <a (click)="filterByType('Ingreso')">Ingresos</a>
+              <a (click)="filterByType('Servicio')">Servicios</a>
+            </div>
+          </div>
+          
+        </div>
+        <table class="expenses-table">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Información</th>
+              <th>Monto</th>
+              <th>Fecha</th>
+              <th *ngIf="rolUsuario === 'admin'">Usuario al que pertenece</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of resumen">
+              <td>{{ item.type }}</td>
+              <td>{{ item.Descripcion || item.OrigenIngreso || item.Producto }}</td>
+              <td>$ {{ item.Monto }}</td>
+              <td>{{ item.FechaTransaccion || item.FechaIngreso || item.FechaServicio | date }}</td>
+              <td *ngIf="rolUsuario === 'admin'">{{ item.NombreCompleto }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <app-footer></app-footer> 
+  </div>
+</body>
+</html>

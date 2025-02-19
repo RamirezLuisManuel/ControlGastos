@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                  <div class="logo">
+                    <a routerLink="/inicio-usuario">
+                      <span>CONTROL GASTOS</span>
+                    </a>
+                  </div>
+                  <ul class="nav-links">
+                  </ul>
+                </div>
+              </nav>
+              <div class="welcome-bar">
+                Registrar Gasto
+            </div>
+        </header>
+        <main class="main-content">
+            <a routerLink="/gastos/list" class="Btn">
+                <i class="fas fa-list"></i>
+                <div class="text">Lista Gastos</div>
+            </a>
+            <div class="container">
+                <form id="registroForm" class="form-grid" (ngSubmit)="saveGasto()">
+                    <h1>Formulario de Registro</h1>
+                    <p>Completa los siguientes campos para guardar tu gasto.</p>
+                    <div class="form-group">
+                        <div>
+                            <label for="Descripcion">Descripción</label>
+                            <input type="text" id="Descripcion" name="Descripcion" placeholder="Ingresa una descripción" required [(ngModel)]="gasto.Descripcion">
+                            <div class="error-message" *ngIf="errorMessages['Descripcion']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Descripcion'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="Categoria">Categoría</label>
+                            <select id="Categoria" name="Categoria" [(ngModel)]="gasto.Categoria" required>
+                                <option value="">Seleccione una categoría</option>
+                                <option value="Servicio">Servicio</option>
+                                <option value="Subscripción">Subscripción</option>
+                                <option value="Inversión">Inversión</option>
+                                <option value="Gasto Personal">Gasto Personal</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <div class="error-message" *ngIf="errorMessages['Categoria']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Categoria'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="Monto">Monto</label>
+                            <input type="number" id="Monto" name="Monto" placeholder="Ingresa el monto" required [(ngModel)]="gasto.Monto">
+                            <div class="error-message" *ngIf="errorMessages['Monto']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Monto'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="FechaTransaccion">Fecha</label>
+                            <input type="date" id="FechaTransaccion" name="FechaTransaccion" required [(ngModel)]="gasto.FechaTransaccion">
+                            <div class="error-message" *ngIf="errorMessages['FechaTransaccion']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['FechaTransaccion'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="MetodoPago">Método de Pago</label>
+                            <select id="MetodoPago" name="MetodoPago" [(ngModel)]="gasto.MetodoPago" required>
+                                <option value="">Seleccione un método</option>
+                                <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+                                <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="PayPal">PayPal</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <div class="error-message" *ngIf="errorMessages['MetodoPago']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['MetodoPago'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel" routerLink="/gastos/list">Cancelar</button>
+                        <button type="submit" class="submit"><i class="fas fa-check"></i> Guardar</button>
+                    </div>
+                    <div class="error-message" *ngIf="errorMessages['general']">
+                        <i class="fas fa-exclamation-circle"></i> {{ errorMessages['general'] }}
+                    </div>
+                </form>                              
+            </div>
+        </main>   
+        <app-footer></app-footer> 
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <body>
+        <div class="container">
+            <header class="header">
+                <nav class="navbar">
+                    <div class="navbar-container">
+                      <div class="logo">
+                        <a routerLink="/inicio-usuario">
+                          <span>CONTROL GASTOS</span>
+                        </a>
+                      </div>
+                      <ul class="nav-links">
+                      </ul>
+                    </div>
+                  </nav>
+                  <div class="welcome-bar">
+                    Listado Ingreso
+                </div>
+            </header>
+            <main class="main-content">
+                <div *ngIf="notificationMessage" class="notification">
+                    {{ notificationMessage }} <i class="fas fa-check"></i>
+                </div>
+                <div class="floating-window">
+                    <li class="left" *ngFor="let presupuesto of presupuestos">
+                        <a>
+                            Presupuesto actual: 
+                            <span [ngClass]="{'text-red': presupuesto.PresupuestoActual < 0, 'text-green': presupuesto.PresupuestoActual >= 0}">
+                                ${{ presupuesto.PresupuestoActual }}
+                            </span>
+                        </a>
+                    </li>
+                </div>
+                <a routerLink="/servicios/add" class="Btn">
+                    <i class="fas fa-plus"></i> 
+                    <div class="text">Agregar servicio</div>
+                </a>
+                <h1>Lista de servicios</h1>
+                <div class="white-container">
+                    <table class="expenses-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Cliente</th>
+                                <th>Estado</th>
+                                <th>Monto</th>
+                                <th>Fecha de servicio</th>
+                                <th *ngIf="rolUsuario === 'admin'">Nombre</th>
+                                <th *ngIf="rolUsuario === 'admin'">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let servicio of servicios">
+                                <td>{{ servicio.Producto }}</td>
+                                <td>{{ servicio.Cantidad }}</td>
+                                <td>{{ servicio.Cliente }}</td>
+                                <td>{{ servicio.Estado }}</td>
+                                <td>$ {{ servicio.Monto }}</td>
+                                <td>{{ servicio.FechaServicio | date }}</td>
+                                <td *ngIf="rolUsuario === 'admin'" >{{ servicio.NombreCompleto }}</td>
+                                <td *ngIf="rolUsuario === 'admin'">
+                                    <button class="edit-button" (click)="editServicio(servicio.IdServicio)"><i class="fas fa-edit"></i></button> 
+                                    <button class="delete-button" (click)="deleteServicio(servicio.IdServicio)" ><i class="fas fa-trash-alt"></i></button>
+                                </td>                            
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>          
+            <app-footer></app-footer> 
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Gastos</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                    <div class="logo">
+                        <a routerLink="/inicio-usuario">
+                            <span>CONTROL GASTOS</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            <div class="welcome-bar">
+                Post Tweet
+            </div>
+        </header>
+        <main class="main-content">
+                <div class="tweet-container">
+                    <h2>Publicar Tweet</h2>
+                    <form (ngSubmit)="publishTweet()">
+                      <div class="form-group">
+                        <label for="tweetText">Escribe tu mensaje:</label>
+                        <textarea id="tweetText" [(ngModel)]="tweetText" name="tweetText" rows="4" required></textarea>
+                      </div>
+                      <button type="submit" class="btn">Publicar Tweet</button>
+                    </form>
+                  
+                    <div *ngIf="message" class="message">{{ message }}</div>
+                  
+                    <div class="tweet-list">
+                      <h3>Tweets publicados</h3>
+                      <ul>
+                        <li *ngFor="let tweet of tweets">{{ tweet.tweet_text }}</li>
+                      </ul>
+                    </div>
+                  </div>
+        </main>
+    </div>
+</body>
+</html>

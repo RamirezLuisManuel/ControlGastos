@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                    <div class="logo">
+                        <a routerLink="/inicio-usuario">
+                            <span>CONTROL GASTOS</span>
+                        </a>
+                    </div>
+                    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+                    <ul class="styled-list nav-links" [class.show]="isMenuVisible" id="nav-links">
+                        <li><a routerLink="/resumen">Resumen</a></li>
+                        <li><a routerLink="/post-tweets" *ngIf="rolUsuario === 'superAdmin'">Publicar Anuncios</a></li>
+                        <li><a routerLink="/home">Cerrar sesión</a></li>
+                        <li><a routerLink="/usuario">Usuario</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="welcome-bar">
+                Bienvenido
+            </div>
+            <div class="info-container">
+                <div class="floating-window">
+                    <li class="left" *ngFor="let presupuesto of presupuestos">
+                        <a>
+                            Presupuesto actual:
+                            <span
+                                [ngClass]="{'text-red': presupuesto.PresupuestoActual < 0, 'text-green': presupuesto.PresupuestoActual >= 0}">
+                                ${{ presupuesto.PresupuestoActual }}
+                            </span>
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </header>
+        <div class="icon-bar">
+            <button class="Btn twitter" (click)="toggleTweetsPopup()">
+                <div class="sign">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+                        stroke-width="0" fill="currentColor" stroke="currentColor">
+                        <path
+                            d="M8 2H1L9.26086 13.0145L1.44995 21.9999H4.09998L10.4883 14.651L16 22H23L14.3917 10.5223L21.8001 2H19.1501L13.1643 8.88578L8 2ZM17 20L5 4H7L19 20H17Z">
+                        </path>
+                    </svg>
+
+                </div>
+                <div class="text">Twitter</div>
+            </button>
+            <button class="Btn mapbox" routerLink="/ubicacion">
+                <div class="sign">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="text">Mapbox</div>
+            </button>
+            <button class="Btn paypal" routerLink="/paypal">
+                <div class="sign">
+                    <i class="fab fa-paypal"></i>
+                </div>
+                <div class="text">PayPal</div>
+            </button>
+            <button class="Btn finhub" (click)="toggleFinhubPopup()">
+                <div class="sign">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="text">FinHub</div>
+            </button>              
+            <button class="Btn spotify" routerLink="/spotify">
+                <div class="sign">
+                    <i class="fab fa-spotify"></i>
+                </div>
+                <div class="text">Spotify</div>
+            </button>
+            <button class="Btn youtube" (click)="toggleYoutubePopup()">
+                <div class="sign">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <div class="text">YouTube</div>
+            </button>
+            <button class="Btn google" (click)="toggleGooglePopup()">
+                <div class="sign">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="text">Google</div>
+            </button>
+            <button class="Btn telegram" (click)="toggleTelegramPopup()">
+                <div class="sign">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <div class="text">ChatBot</div>
+            </button>
+        </div>
+        <div class="floating-container" id="tweets-popup" [style.display]="isTweetsPopupVisible ? 'block' : 'none'">
+            <h3>Últimos Tweets</h3>
+            <div *ngFor="let tweet of tweets">
+                <p>{{ tweet.tweet_text }}</p>
+                <small>{{ tweet.created_at | date:'short' }}</small>
+                <hr>
+            </div>
+        </div>
+        <div class="floating-container-finhub" id="finhub-popup" 
+            [style.display]="isFinhubPopupVisible ? 'block' : 'none'">
+        <div class="popup-header">
+            <button (click)="toggleFinhubPopup()" class="close-btn">&times;</button>
+        </div>
+
+        <div class="popup-content">
+            <h1>Consulta una Acción Financiera</h1>
+            <div class="white-container">
+                <form (ngSubmit)="onSubmit()" class="form-container">
+                    <div class="form-group">
+                      <label for="ticker">📈 Nombre de la acción a consultar:</label>
+                      <div class="input-wrapper">
+                        <input type="text" id="ticker" [(ngModel)]="ticker" name="ticker" required class="input-field" placeholder="Ej: AAPL, TSLA, MSFT">
+                        <i class="fas fa-search input-icon"></i>
+                      </div>
+                    </div>
+                  
+                    <button type="submit" class="submit-btn">
+                      <i class="fas fa-chart-line"></i> Consultar
+                    </button>
+                  </form>                                 
+            </div>
+            
+            <div *ngIf="searchPerformed" class="financial-info">
+                <h2>📊 Información Financiera: {{ ticker }}</h2>
+              
+                <div class="white-container">
+                  <table class="styled-table">
+                    <thead>
+                      <tr>
+                        <th>📌 Precio Actual</th>
+                        <th>📈 Precio Alto del Día</th>
+                        <th>📉 Precio Bajo del Día</th>
+                        <th>🟢 Precio de Apertura</th>
+                        <th>🔴 Precio de Cierre Anterior</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngIf="!loading && stockData">
+                        <td><strong>{{ stockData.c | number: '1.2-2' }}</strong> USD</td>
+                        <td><strong>{{ stockData.h | number: '1.2-2' }}</strong> USD</td>
+                        <td><strong>{{ stockData.l | number: '1.2-2' }}</strong> USD</td>
+                        <td><strong>{{ stockData.o | number: '1.2-2' }}</strong> USD</td>
+                        <td><strong>{{ stockData.pc | number: '1.2-2' }}</strong> USD</td>
+                      </tr>
+                      <tr *ngIf="loading">
+                        <td colspan="5" class="loading-row">⏳ Cargando información...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>   
+              <br>
+              <div *ngIf="recommendations && recommendations.length > 0" class="recommendation-section">
+                <h2>📊 Tendencias de Recomendación: {{ ticker }}</h2>
+              
+                <div class="white-container">
+                  <table class="styled-table">
+                    <thead>
+                      <tr>
+                        <th>📅 Periodo</th>
+                        <th>🟢 Comprar</th>
+                        <th>🔴 Vender</th>
+                        <th>🟡 Conservar</th>
+                        <th>✅ Compra Fuerte</th>
+                        <th>❌ Venta Fuerte</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let recommendation of recommendations">
+                        <td><strong>{{ recommendation.period }}</strong></td>
+                        <td class="buy-cell">{{ recommendation.buy }}</td>
+                        <td class="sell-cell">{{ recommendation.sell }}</td>
+                        <td class="hold-cell">{{ recommendation.hold }}</td>
+                        <td class="strong-buy-cell">{{ recommendation.strongBuy }}</td>
+                        <td class="strong-sell-cell">{{ recommendation.strongSell }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+            <br>
+            <div *ngIf="companyNews && companyNews.length > 0" class="news-section">
+                <h2>📰 Noticias Recientes en Finanzas</h2>
+              
+                <div class="white-container">
+                  <table class="styled-table">
+                    <thead>
+                      <tr>
+                        <th>📢 Titular</th>
+                        <th>📌 Resumen</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let article of companyNews">
+                        <td>
+                          <strong>{{ article.headline }}</strong>
+                        </td>
+                        <td>
+                          {{ article.summary }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+        </div>
+        </div>
+
+        <div class="floating-container-youtube main" id="youtube-popup"
+            [style.display]="isYoutubePopupVisible ? 'block' : 'none'">
+            <div class="currentplaying">
+                <i class="fab fa-youtube"></i>
+                <p class="heading">Bienvenido a YouTube</p>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search__input" placeholder="Buscar videos" #searchInput>
+                <button class="search__button" (click)="searchVideos(searchInput.value)">
+                    <i class="fas fa-search search__icon"></i> <!-- Ícono de lupa dentro del buscador -->
+                </button>
+            </div>
+            <div *ngFor="let video of videos" class="video-item">
+                <img [src]="'https://img.youtube.com/vi/' + video.videoId + '/0.jpg'" alt="{{ video.title }}"
+                    class="video-thumbnail" (click)="playVideo(video.videoId)" />
+                <div (click)="playVideo(video.videoId)" class="video-info">
+                    <p class="name">{{ video.title }}</p>
+                    <p class="artist">{{ video.channelTitle }}</p>
+                </div>
+            </div>
+
+            <div *ngIf="selectedVideoUrl" class="video-popup" #videoPopup (mousedown)="onMouseDown($event)"
+                (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()">
+                <iframe [src]="selectedVideoUrl | safeUrl" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+        </div>
+        <div class="floating-container-telegram" id="telegram-popup"
+            [style.display]="isTelegramPopupVisible ? 'block' : 'none'">
+            <div class="chat-card">
+                <div class="chat-header">
+                    <div class="h2">Telegram ChatBot</div>
+                </div>
+                <div class="chat-body">
+                    <!-- Muestra los mensajes -->
+                    <div *ngFor="let message of chatMessages"
+                        [ngClass]="{'incoming': message.type === 'incoming', 'outgoing': message.type === 'outgoing'}">
+                        <p>{{ message.text }}</p>
+                    </div>
+                </div>
+                <div class="chat-footer">
+                    <input #messageInput placeholder="Ingresa mensaje" type="text">
+                    <button (click)="sendMessage()">Enviar</button>
+                </div>
+            </div>
+        </div>
+        <div class="floating-container-google" id="google-popup"
+            [style.display]="isGooglePopupVisible ? 'block' : 'none'">
+            <div class="searchbar">
+                <div class="searchbar-wrapper">
+                    <div class="searchbar-left">
+                        <div class="search-icon-wrapper">
+                            <span class="search-icon searchbar-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="searchbar-center">
+                        <div class="searchbar-input-spacer"></div>
+                        <input type="text" class="searchbar-input" [(ngModel)]="query" (keyup.enter)="performSearch()"
+                            (input)="onInputChange(query)" maxlength="2048" name="q" autocapitalize="off"
+                            autocomplete="off" title="Search" role="combobox" placeholder="Search Google" />
+
+
+                        <!-- Sugerencias -->
+                        <div *ngIf="filteredSuggestions.length > 0" class="suggestions-dropdown">
+                            <div *ngFor="let suggestion of filteredSuggestions"
+                                (click)="query = suggestion; performSearch()" class="suggestion-item">
+                                {{ suggestion }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="searchbar-right">
+                        <button class="searchbar-button" (click)="performSearch()">Buscar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultados de búsqueda -->
+            <div *ngIf="searchPerformed" class="search-results">
+                <div *ngFor="let result of results" class="search-result-item">
+                    <h3>{{ result.title }}</h3>
+                    <p>{{ result.snippet }}</p>
+                    <a [href]="result.link" target="_blank">{{ result.link }}</a>
+                    <hr class="search-result-divider">
+                </div>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <section class="gastos">
+                <div class="card">
+                  <div class="face front">
+                    <img src="/assets/F1.jpg" alt="Gastos">
+                    <h3>Gastos</h3>
+                  </div>
+                  <div class="face back">
+                    <h2>Gasto</h2>
+                    <p>Aquí puedes registrar y seguir todas las salidas de dinero.</p>
+                    <div class="enlace">
+                      <a routerLink="/gastos/list">Ver mis gastos...</a>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="card">
+                  <div class="face front">
+                    <img src="/assets/F2.jpg" alt="Ingresos">
+                    <h3>Ingresos</h3>
+                  </div>
+                  <div class="face back">
+                    <h2>Ingreso</h2>
+                    <p>Registra todas las entradas de dinero.</p>
+                    <div class="enlace">
+                      <a routerLink="/ingresos/list">Ver ingresos...</a>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="card">
+                  <div class="face front">
+                    <img src="/assets/F3.jpg" alt="Servicios">
+                    <h3>Servicios</h3>
+                  </div>
+                  <div class="face back">
+                    <h2>Servicio</h2>
+                    <p>Administra todos los servicios que has contratado.</p>
+                    <div class="enlace">
+                      <a routerLink="/servicios/list">Ver mis servicios...</a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </main>
+        <app-footer></app-footer> 
+    </div>
+</body>
+</html>

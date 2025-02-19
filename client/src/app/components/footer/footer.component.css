@@ -1,0 +1,76 @@
+/* FOOTER QUE NO TAPA PERO ESTÁ MÁS ABAJO */
+.app-footer {
+  background: linear-gradient(135deg, #1a1a1a, #333);
+  color: white;
+  padding: 15px 0; /* Menos padding para que no sea tan grande */
+  text-align: center;
+  width: 100%;
+  position: relative; /* Evita que flote sobre el contenido */
+  margin-top: 20px; /* Baja el footer un poco, pero no demasiado */
+}
+
+/* HACE QUE EL BODY OCUPE TODA LA ALTURA DISPONIBLE */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CONTENEDOR PRINCIPAL PARA QUE EL FOOTER QUEDE AL FINAL */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* PERMITE QUE EL CONTENIDO EMPUJE EL FOOTER */
+.main-content {
+  flex: 1;
+  padding-bottom: 60px; /* Un poco de espacio para evitar que el contenido se pegue al footer */
+}
+
+/* CONTENEDOR DEL FOOTER */
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ESTILOS DE LOS ENLACES */
+.footer-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* BOTONES DEL FOOTER */
+.footer-btn {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.footer-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+/* ÍCONOS */
+.footer-btn i {
+  font-size: 18px;
+}
+
+/* TEXTO DEL COPYRIGHT */
+.footer-info p {
+  font-size: 14px;
+  color: #aaa;
+}

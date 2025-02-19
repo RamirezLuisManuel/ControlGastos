@@ -1,0 +1,51 @@
+<div class="container">
+  <header class="header">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="logo">
+          <a routerLink="/">
+            <span>CONTROL GASTOS</span>
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a routerLink="/registrarse">Registrarse</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="welcome-bar">
+      Verificación de Token
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div *ngIf="mensaje" class="notification">
+      {{ mensaje }} <i class="fas fa-check"></i>
+    </div>
+
+    <form class="form animated-border-form" (ngSubmit)="validarToken()">
+      <div class="flex-column">
+        <label for="token">Token de Autenticación</label>
+      </div>
+      <div class="inputForm">
+        <i class="fas fa-key"></i>
+        <input
+          type="text"
+          id="token"
+          class="input"
+          placeholder="Ingresa el token recibido"
+          name="token"
+          [(ngModel)]="token"
+          required
+          #tokenInput="ngModel"
+        />
+      </div>
+      <div *ngIf="tokenInput.invalid && tokenInput.touched" class="validation-error">
+        El token es obligatorio.
+      </div>
+
+      <button type="submit" class="button-submit" [disabled]="tokenInput.invalid">
+        Validar Token
+      </button>
+    </form>
+  </main>
+</div>

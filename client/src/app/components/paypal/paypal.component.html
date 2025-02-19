@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                    <div class="logo">
+                        <a routerLink="/inicio-usuario">
+                            <span>CONTROL GASTOS</span>
+                        </a>
+                    </div>
+                    <ul class="nav-links"></ul>
+                </div>
+            </nav>
+            <div class="welcome-bar">
+                PayPal
+            </div>
+            <div class="info-container">
+                <div class="floating-window">
+                    <ul class="left">
+                        <li *ngFor="let presupuesto of presupuestos">
+                            <a>
+                                Presupuesto actual:
+                                <span
+                                    [ngClass]="{'text-red': presupuesto.PresupuestoActual < 0, 'text-green': presupuesto.PresupuestoActual >= 0}">
+                                    ${{ presupuesto.PresupuestoActual }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div *ngIf="notificationService.notification$ | async as message" class="notification">
+            {{ message }}
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <main class="main-content">
+            <section class="paypal">
+                <div class="transferencia-container">
+                    <img src="/assets/paypal.png" alt="Imagen de encabezado" class="encabezado-imagen">
+                    <h2>Transferencia Bancaria</h2>
+                    <form>
+                        <div class="row">
+                            <div class="column">
+                                <label for="tarjeta">Seleccionar Tarjeta</label>
+                                <div class="radio-group">
+                                    <div *ngFor="let tarjeta of tarjetas" class="tarjeta-item">
+                                        <input type="radio" [id]="tarjeta.NumeroTarjeta" name="tarjeta"
+                                            (change)="onTarjetaSeleccionada(tarjeta)">
+                                        <label [for]="tarjeta.NumeroTarjeta">
+                                            {{ obtenerUltimos4Digitos(tarjeta.NumeroTarjeta) }}
+                                        </label>
+                                        <button class="btn-eliminar" (click)="eliminarTarjeta(tarjeta.IdTarjeta)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button class="agregar-tarjeta" routerLink="/tarjeta" type="button">
+                                    Agregar Tarjeta
+                                </button>
+
+                                <div *ngIf="tarjetaSeleccionada" class="saldo-disponible">
+                                    <label>Saldo disponible:</label>
+                                    <span class="text-green">
+                                        ${{ saldoSeleccionado }}
+                                    </span>
+                                </div>
+
+                                <label for="beneficiario">Beneficiario</label>
+                                <input type="text" id="beneficiario" placeholder="Nombre del beneficiario">
+
+                                <label for="cuenta">Número de Cuenta</label>
+                                <input type="text" id="cuenta" placeholder="IBAN o número de cuenta">
+
+                                <label for="monto">Monto a Transferir</label>
+                                <input type="number" id="monto" name="monto" placeholder="Ingrese el monto"
+                                    [(ngModel)]="nuevoSaldo" min="1">
+                            </div>
+
+                            <div class="column">
+                                <label for="concepto">Concepto</label>
+                                <input type="text" id="concepto" placeholder="Motivo de la transferencia">
+
+                                <label for="banco">Banco Origen</label>
+                                <input type="text" id="banco" [value]="tarjetaSeleccionada ? bancoOrigen : 'Banco'"
+                                    disabled>
+
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="button" class="cancelar" routerLink="/inicio-usuario">Cancelar</button>
+                            <button class="confirmar" (click)="confirmarTransferencia()">
+                                Pay
+                                <svg class="svgIcon" viewBox="0 0 576 512">
+                                    <path
+                                        d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <nav class="navbar">
+          <div class="navbar-container">
+            <div class="logo">
+              <a routerLink="/inicio-usuario">
+                <span>CONTROL GASTOS</span>
+              </a>
+            </div>
+            <ul class="nav-links">
+            </ul>
+          </div>
+        </nav>
+        <div class="welcome-bar">
+          Listado Gasto
+        </div>
+      </header>
+      <main class="main-content">
+        <div *ngIf="notificationMessage" class="notification">
+          {{ notificationMessage }} <i class="fas fa-check"></i>
+        </div>
+        <div class="floating-window">
+          <li class="left" *ngFor="let presupuesto of presupuestos">
+              <a>
+                  Presupuesto actual: 
+                  <span [ngClass]="{'text-red': presupuesto.PresupuestoActual < 0, 'text-green': presupuesto.PresupuestoActual >= 0}">
+                      ${{ presupuesto.PresupuestoActual }}
+                  </span>
+              </a>
+          </li>
+        </div>
+        <a routerLink="/gastos/add" class="Btn">
+          <i class="fas fa-plus"></i> 
+          <div class="text">Agregar Gasto</div>
+        </a>                         
+        <h1>Lista de Gastos</h1>
+        <div class="white-container">
+          <table class="expenses-table">
+            <thead>
+              <tr>
+                <th>Descripcion</th>
+                <th>Categoria</th>
+                <th>Monto</th>
+                <th>Fecha de transaccion</th>
+                <th>Metodo de Pago</th>
+                <th *ngIf="rolUsuario === 'admin' || rolUsuario === 'superAdmin'">Nombre</th>
+                <th *ngIf="rolUsuario === 'superAdmin'">Administrador</th>
+                <th *ngIf="rolUsuario === 'admin' || rolUsuario === 'superAdmin'">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let gasto of gastos">
+                <td data-label="Descripcion">{{ gasto.Descripcion }}</td>
+                <td data-label="Categoria">{{ gasto.Categoria }}</td>
+                <td data-label="Monto">$ {{ gasto.Monto }}</td>
+                <td data-label="Fecha de transaccion">{{ gasto.FechaTransaccion | date }}</td>
+                <td data-label="Metodo de Pago">{{ gasto.MetodoPago }}</td>
+                <td *ngIf="rolUsuario === 'admin'" data-label="Nombre">{{ gasto.NombreCompletoUsuario }}</td>
+                <td *ngIf="rolUsuario === 'superAdmin'" data-label="Nombre">{{ gasto.NombreCompletoUsuario }}</td>
+                <td *ngIf="rolUsuario === 'superAdmin'" data-label="Nombre">{{ gasto.NombreCompletoAdmin }}</td>
+                <td *ngIf="rolUsuario === 'admin' || rolUsuario === 'superAdmin'" data-label="Acciones">
+                  <button class="edit-button" (click)="editGasto(gasto.IdGasto)" ><i class="fas fa-edit"></i></button>
+                  <button class="delete-button" (click)="deleteGasto(gasto.IdGasto)" ><i class="fas fa-trash-alt"></i></button>
+                </td>
+              </tr>
+            </tbody>            
+          </table>
+        </div>
+      </main>
+      <app-footer></app-footer> 
+    </div>
+  </body>
+</html>

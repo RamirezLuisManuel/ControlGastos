@@ -1,0 +1,547 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  background-color: #4a4657;
+  color: white;
+}
+
+.navbar {
+  height: 80px;
+  background-color: #1c1c1c;
+  padding: 15px 0;
+  color: white;
+  justify-content: center;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.logo img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.logo span {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: -80px;
+  margin-top: 15px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin-left: auto;
+  margin-top: 15px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+  font-family: sans-serif;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #888;
+}
+
+.cart-icon::before {
+  content: '\1F6D2'; 
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.nav-links li:last-child a {
+  display: flex;
+  align-items: center;
+}
+
+.welcome-bar {
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  border-top: 1px solid #ccc;
+  font-weight: 600;
+  border: 1px solid black;
+}
+
+.main-content {
+  background-color: #f1edec;
+  background-image:url('/assets/Fondo_Resumen.png') ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.main-content .white-container {
+  background-color: #fff2cc;
+  padding: 20px;
+  border-radius: 5px; 
+  box-shadow: 13px 13px 23px rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
+  background: rgba(0, 0, 0, 0.356); 
+  backdrop-filter: blur(10px);
+  width: 90%;
+  margin: 0 auto;
+}
+
+.main-content h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.main-content h1 {
+  color: #fff;
+  font-family: sans-serif;
+}
+
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 15px;
+  border-radius: 25px;
+  align-items: center;
+}
+
+.expenses-table th, .expenses-table td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+.expenses-table th {
+  background-color: #49454f;
+  color: white;
+}
+
+.expenses-table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.expenses-table tbody tr:nth-child(even) {
+  background-color: #e5e5e5;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 80%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+.filter-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -20px;
+}
+
+.button_filter {
+  font-family: sans-serif;
+  padding: 8px 15px;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #270d0a8e;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: medium;
+  color: #fff2cc;
+}
+
+.filter-dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.filter-dropdown .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.filter-dropdown .dropdown-content a:hover {
+  background-color: #8b8b8b;
+}
+
+.filter-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.filter-dropdown:hover .button_filter {
+  background-color: #00000094;
+}
+
+/* Nuevos estilos para el filtro por tipo */
+.type-filter-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px; /* Ajusta la separación según sea necesario */
+}
+
+.type-filter-dropdown .button_filter {
+  font-family: sans-serif;
+  padding: 8px 15px;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #270d0a8e;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: medium;
+  color: #fff2cc;
+}
+
+.type-filter-dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.type-filter-dropdown .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.type-filter-dropdown .dropdown-content a:hover {
+  background-color: #8b8b8b;
+}
+
+.type-filter-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.type-filter-dropdown:hover .button_filter {
+  background-color: #00000094;
+}
+
+.filter-dropdown input[type="date"] {
+  font-family: sans-serif;
+  padding: 8px 15px;
+  color: #fff2cc;
+  border: 2px solid #262f57;
+  border-radius: 5px;
+  background-color: #270d0a8e;
+  font-weight: 600;
+  font-size: medium;
+  cursor: pointer;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.filter-dropdown input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #fff2cc;
+  background-color: #270d0a8e;
+}
+
+.button_descargar {
+  position: relative;
+  font-family: sans-serif;
+  padding: 0.7em 1.4em;
+  font-size: 1.2em;
+  background-color: #8b2115;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  color: #fff2cc;
+  font-weight: 600;
+  margin-right: 80px;
+  margin-bottom: 20px;
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button_descargar::before {
+  position: absolute;
+  content: '';
+  height: 0;
+  width: 0;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, rgb(77, 68, 68) 0%, rgba(33, 33, 33, 0.349) 50%, rgba(33, 33, 33, 0.349) 50%, rgba(191,4,38,1) 60%);
+  border-radius: 0 0 0.5em 0;
+  box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+.button_descargar:hover::before {
+  width: 1.6em;
+  height: 1.6em;
+}
+
+.button_descargar:active {
+  box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.3);
+  transform: translate(0.1em, 0.1em);
+}
+
+@media screen and (max-width: 768px) {
+  .logo span {
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-left: 0px;
+    margin-top: 13px;
+  }
+  
+  .main-content .Btn {
+    margin-left: 280px;
+    margin-top: -40px;
+  }
+
+  .expenses-table {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .expenses-table th,
+  .expenses-table td {
+    padding: 5px;
+  }
+
+  .expenses-table thead {
+    display: none;
+  }
+
+  .expenses-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+
+  .expenses-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .expenses-table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .expenses-table tbody td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .button_descargar {
+    position: relative;
+    font-family: sans-serif;
+    padding: 0.4em 2em; 
+    font-size: 1.1em;   
+    background-color: #8b2115;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    color: #fff2cc;
+    font-weight: 600;
+    margin-right: 80px;
+    margin-bottom: 20px;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+}
+
+.filters {
+
+  display: flex;
+
+  gap: 0; /* Elimina el espacio entre los botones */
+
+  margin-bottom: 20px;
+
+}
+
+
+.filter-dropdown,
+
+.type-filter-dropdown {
+
+  margin: 0; /* Asegúrate de que no haya margen */
+
+}
+
+.type-filter-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.button_filter {
+  font-family: sans-serif;
+  padding: 8px 15px;
+  color: black;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  background-color: #270d0a8e;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: medium;
+  color: #fff2cc;
+}
+
+.button_filter:first-child {
+
+  border-top-left-radius: 5px; /* Redondea la esquina superior izquierda */
+
+  border-bottom-left-radius: 5px; /* Redondea la esquina inferior izquierda */
+
+}
+
+
+.button_filter:last-child {
+
+  border-top-right-radius: 5px; /* Redondea la esquina superior derecha */
+
+  border-bottom-right-radius: 5px; /* Redondea la esquina inferior derecha */
+
+}
+
+.filter-dropdown input[type="date"] {
+  font-family: sans-serif;
+  padding: 8px 15px;
+  color: #fff2cc;
+  border: 2px solid #262f57;
+  border-radius: 5px;
+  background-color: #270d0a8e;
+  font-weight: 600;
+  font-size: medium;
+  cursor: pointer;
+}
+
+.filter-dropdown input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #fff2cc;
+  background-color: #270d0a8e;
+}
+
+.type-filter-dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.type-filter-dropdown .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.type-filter-dropdown .dropdown-content a:hover {
+  background-color: #8b8b8b;
+}
+
+.type-filter-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.type-filter-dropdown:hover .button_filter {
+  background-color: #00000094;
+}
+/* Hace que la celda de descripción tenga un tamaño fijo y scroll cuando el texto es largo */
+td[data-label="Descripcion"] {
+  max-width: 200px; /* Ajusta el ancho según tu necesidad */
+  height: 50px; /* Altura fija */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Muestra "..." cuando el texto es demasiado largo */
+  white-space: nowrap; /* Evita que el texto se desborde */
+  cursor: pointer; /* Indica que se puede interactuar */
+}
+
+td[data-label="Descripcion"]:hover {
+  white-space: normal; /* Permite que el texto se expanda al pasar el mouse */
+  overflow: auto; /* Activa el scroll si es necesario */
+  max-height: 150px; /* Limita la expansión */
+  background: rgba(0, 0, 0, 0.05); /* Opcional: resalta la celda al expandirse */
+  padding: 5px;
+}

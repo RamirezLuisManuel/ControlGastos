@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-container">
+                  <div class="logo">
+                    <a routerLink="/inicio-usuario">
+                      <span>CONTROL GASTOS</span>
+                    </a>
+                  </div>
+                  <ul class="nav-links">
+                  </ul>
+                </div>
+              </nav>
+              <div class="welcome-bar">
+                Registro Servicio
+            </div>
+        </header>
+        <main class="main-content">
+            <a routerLink="/servicios/list" class="Btn">
+                <i class="fas fa-list"></i>
+                <div class="text">Lista Servicios</div>
+            </a>
+            <div class="container">
+                <form id="registroForm" class="form-grid" (ngSubmit)="saveServicio()">
+                    <h1>Formulario de Registro</h1>
+                    <p>Completa los siguientes campos para guardar tu servicio.</p>
+                    <div class="form-group">
+                        <div>
+                            <label for="producto">Producto</label>
+                            <select id="producto" name="producto" [(ngModel)]="servicio.Producto" required>
+                                <option value="" disabled selected>Selecciona producto</option>
+                                <option value="Vaso(s)">Vaso(s)</option>
+                                <option value="Taza(s)">Taza(s)</option>
+                                <option value="Termo(s)">Termo(s)</option>
+                                <option value="Tarro(s)">Tarro(s)</option>
+                                <option value="Estampa(s)">Estampa(s)</option>
+                                <option value="Caja(s)">Caja(s)</option>
+                                <option value="Etiqueta(s)">Etiqueta(s)</option>
+                                <option value="Botella(s) decorada">Botella(s) decorada</option>
+                                <option value="Lona(s)">Lona(s)</option>
+                                <option value="Letra(s)">Letra(s)</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <div class="error-message" *ngIf="errorMessages['Producto']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Producto'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" id="cantidad" name="cantidad" placeholder="Ingresa la cantidad" required [(ngModel)]="servicio.Cantidad">
+                            <div class="error-message" *ngIf="errorMessages['Cantidad']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Cantidad'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="cliente">Cliente</label>
+                            <input type="text" id="cliente" name="cliente" placeholder="Ingresa el nombre del cliente" required [(ngModel)]="servicio.Cliente">
+                            <div class="error-message" *ngIf="errorMessages['Cliente']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Cliente'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="estado">Estado</label>
+                            <select id="estado" name="estado" [(ngModel)]="servicio.Estado" required>
+                                <option value="" disabled selected>Selecciona estado</option>
+                                <option value="Liquidado">Liquidado</option>
+                                <option value="Saldo pendiente">Saldo pendiente</option>
+                                <option value="Deuda">Deuda</option>
+                            </select>
+                            <div class="error-message" *ngIf="errorMessages['Estado']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Estado'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="monto">Monto</label>
+                            <input type="number" id="monto" name="monto" placeholder="Ingresa el monto" required [(ngModel)]="servicio.Monto">
+                            <div class="error-message" *ngIf="errorMessages['Monto']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Monto'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="fechaServicio">Fecha de Servicio</label>
+                            <input type="date" id="fechaServicio" name="fechaServicio" required [(ngModel)]="servicio.FechaServicio">
+                            <div class="error-message" *ngIf="errorMessages['FechaServicio']">
+                                <i class="fas fa-exclamation-circle"></i> {{ errorMessages['FechaServicio'] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel" routerLink="/servicios/list">Cancelar</button>
+                        <button type="submit" class="submit"><i class="fas fa-check"></i> Guardar</button>
+                    </div>
+                    <div class="error-message" *ngIf="errorMessages['general']">
+                        <i class="fas fa-exclamation-circle"></i> {{ errorMessages['general'] }}
+                    </div>
+                </form>                              
+            </div>
+        </main>   
+        <app-footer></app-footer> 
+    </div>
+</body>
+</html>
