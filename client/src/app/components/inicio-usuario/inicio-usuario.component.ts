@@ -425,6 +425,11 @@ export class InicioUsuarioComponent implements OnInit, AfterViewInit {
       this.searchPerformed = true;
     }
   }
+
+  //Metodo para acceso rapido a apartados (gastos, ingresos, servicios)
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 }
 
 

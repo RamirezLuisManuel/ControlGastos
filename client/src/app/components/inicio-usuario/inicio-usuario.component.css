@@ -1585,3 +1585,14 @@ li:hover .tooltip {
     padding: 8px;
   }
 }
+
+.card a {
+  text-decoration: none; /* Elimina el subrayado del enlace */
+  color: inherit; /* Hereda el color del texto */
+  display: block; /* Hace que el enlace ocupe todo el espacio de la tarjeta */
+  height: 100%; /* Asegura que el enlace ocupe toda la altura de la tarjeta */
+}
+
+.card {
+  cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+}
