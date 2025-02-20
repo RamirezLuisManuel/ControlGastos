@@ -17,19 +17,24 @@
         <br>
         <div *ngIf="isLoadingPodcasts">Cargando podcasts...</div>
         <div *ngIf="error" class="text-red">{{ error }}</div>
-
-        <div *ngIf="selectedPodcastEmbedUrl" class="spotify-player">
-            <iframe 
+        <div class="floating-container" *ngIf="isPodcastPopupVisible">
+            <div class="popup-header">
+              <button (click)="closePodcastPopup()" class="close-btn">&times;</button>
+            </div>
+            <div class="popup-content">
+              <iframe 
+                *ngIf="selectedPodcastEmbedUrl" 
                 [src]="selectedPodcastEmbedUrl" 
                 width="100%" 
                 height="380" 
                 frameborder="0" 
                 allowtransparency="true" 
                 allow="encrypted-media">
-            </iframe>
-        </div>
-
-        <div class="white-container">
+              </iframe>
+            </div>
+          </div>
+          
+          <div class="white-container">
             <h1>Seleccione su podcast favorito.</h1>
             <div class="podcast-grid">
                 <div *ngFor="let podcast of podcasts" class="podcast-card" (click)="selectPodcast(podcast.id)">

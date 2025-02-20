@@ -1,9 +1,7 @@
+:root {
+  --app-font-size: 100%;
+}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  @import-normalize; 
-  
+body {
+  font-size: var(--app-font-size);
+}

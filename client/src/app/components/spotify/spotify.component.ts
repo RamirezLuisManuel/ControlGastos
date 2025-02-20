@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SpotifyService } from '../../services/spotify.service';
 import { PresupuestosService } from '../../services/presupuestos.service';
 import { NotificationService } from '../../services/notification.service';
+
 @Component({
   selector: 'app-spotify',
   templateUrl: './spotify.component.html',
@@ -14,11 +15,13 @@ export class SpotifyComponent implements OnInit {
   idUsuario: string | null = null;
   isAdmin: boolean;
   accessToken: string | null = null;
-  selectedPodcastEmbedUrl: SafeResourceUrl | null = null;
+  selectedPodcastEmbedUrl: SafeResourceUrl | null = null; 
   podcasts: any[] = [];
   selectedPodcastEpisodes: any[] = [];
   isLoadingPodcasts = false;
   error: string | null = null;
+  isPodcastPopupVisible: boolean = false; // Controla la visibilidad del popup
+  
 
   constructor(
     private presupuestosService: PresupuestosService,
@@ -69,9 +72,15 @@ export class SpotifyComponent implements OnInit {
     });
   }
 
-// Método para seleccionar un podcast y crear el URL embebido
-selectPodcast(podcastId: string): void {
-  const url = `https://open.spotify.com/embed/show/${podcastId}`;
-  this.selectedPodcastEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-}
+  // Método para seleccionar un podcast y crear el URL embebido
+  selectPodcast(podcastId: string): void {
+    const url = `https://open.spotify.com/embed/show/${podcastId}`;
+    this.selectedPodcastEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    this.isPodcastPopupVisible = true;
+  }
+
+  closePodcastPopup() {
+    this.isPodcastPopupVisible = false; // Cierra el popup
+    this.selectedPodcastEmbedUrl = null; // Limpia la URL
+  }
 }

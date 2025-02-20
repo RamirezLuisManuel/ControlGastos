@@ -159,3 +159,37 @@ body {
   margin-top: 5px;
   line-height: 1.4;
 }
+
+.floating-container {
+  position: fixed;
+  top: 45%; /* Ajusta este valor para mover la ventana hacia abajo */
+  left: 75%; /* Ajusta este valor para mover la ventana hacia la derecha */
+  transform: translate(-50%, -50%); /* Mantiene el centrado relativo */
+  background: rgb(156, 156, 156);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  width: 80%; /* Ancho de la ventana */
+  max-width: 600px; /* Ancho máximo */
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff; /* Color de fondo del encabezado */
+  padding: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.popup-content {
+  padding: 10px;
+}

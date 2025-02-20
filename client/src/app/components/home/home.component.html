@@ -10,18 +10,19 @@
         <header class="header">
             <nav class="navbar">
                 <div class="navbar-container">
-                    <div class="logo">
-                        <a routerLink="/">
-                            <span>CONTROL GASTOS</span>
-                        </a>
-                    </div>
-                    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
-                    <ul class="styled-list nav-links" [class.show]="isMenuVisible" id="nav-links">
-                        <li><a routerLink="/registrarse">Registrarte</a></li>
-                        <li><a routerLink="/login">Inicia sesión</a></li>
-                    </ul>
+                  <div class="logo">
+                    <a routerLink="/">
+                      <span>CONTROL GASTOS</span>
+                    </a>
+                  </div>
+                  <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+                  <ul class="styled-list nav-links" [class.show]="isMenuVisible">
+                    <li><a routerLink="/registrarse">Registrarte</a></li>
+                    <li><a routerLink="/login">Inicia sesión</a></li>
+                  </ul>
                 </div>
-            </nav>
+              </nav>
+              
             <div class="welcome-bar">
                 Bienvenido
             </div>

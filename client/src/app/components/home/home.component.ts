@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,14 +18,16 @@ export class HomeComponent implements OnInit {
     { src: 'assets/imagen4.jpg', text: '“Revisa y ajusta: el camino hacia unas finanzas saludables.”' }
   ];
 
-  constructor(private notificationService: NotificationService) {}
+  constructor( 
+    private notificationService: NotificationService,   
+  ) {}
 
   ngOnInit() {
     this.notificationService.notification$.subscribe(message => {
       this.notificationMessage = message;
     });
   }
-
+  
   toggleMenu(): void {
     this.isMenuVisible = !this.isMenuVisible;
   }
